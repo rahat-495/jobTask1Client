@@ -1,0 +1,99 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.play {
+  font-family: "Playwrite DE Grund", cursive;
+}
+
+.gro {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.bar {
+  font-family: "Barlow", sans-serif;
+}
+
+:root {
+	--link-1: #D65472;
+	--text: #18272F;
+}
+
+#style-2 {
+	position: relative;
+	transition: color .3s ease-in-out;
+	
+	&::before {
+		content: '';
+		position: absolute;
+		top: 70%;
+		width: 95%;
+    border: 1px solid;
+		border-color: var(--link-1);
+		transform: scaleX(0);
+		transition: transform .3s ease-in-out;
+	}
+	
+	&:hover {
+		color: var(--link-1);
+	}
+	
+	&:hover::before {
+		transform: scaleX(1);
+	}	
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+.link {
+  align-items: center;
+  text-decoration: none;
+  display: flex;
+  margin-bottom: 6px;
+}
+
+/* Hide extra text */
+.mask {
+  position: relative;
+  padding: 0;
+  height: 20px;
+  overflow: hidden;
+}
+
+.link-container {
+  transition: transform 0.4s ease;
+}
+
+.title {
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.link-title1 {
+  transform-origin: right center;
+}
+
+.link-title2 {
+  font-weight: 600;
+  transform-origin: left center;
+  transform: rotate(30deg);
+}
+
+/* Hover Action*/
+
+/* Move up two texts (20px = font-size) */
+.link:hover .link-container {
+  transform: translateY(-28px);
+}
+
+/* Rotate texts a little bit */
+.link:hover .link-title1 {
+  transform: rotate(20deg);
+}
+
+.link:hover .link-title2 {
+  transform: rotate(0);
+}
