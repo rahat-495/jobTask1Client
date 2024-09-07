@@ -6,14 +6,18 @@ import { RxCross2 } from "react-icons/rx";
 
 const MyCart = () => {
 
-    const {count , cartItems , handleAdd} = useContext(ProductsContext) ;
+    const {count , cartItems , handleAdd , handleRemove , handleDelete} = useContext(ProductsContext) ;
 
-    const handleAddItem = (item) => {
-        
+    const handleAddItem = async (item) => {
+        const data = await handleAdd(item) ;
+    }
+    
+    const handleRemoveItem = async (item) => {
+        const data = await handleRemove(item) ;
     }
 
-    const handleRemoveItem = (item) => {
-
+    const handleDeleteItem = async (item) => {
+        const data = await handleDelete(item) ;
     }
 
     return (
@@ -29,17 +33,22 @@ const MyCart = () => {
                         cartItems?.length > 0 && cartItems?.map((item) => (
                         <div key={item?._id} className="w-full border-b pb-6 mb-6 flex items-start justify-between gap-5">
                             
-                            <div className="flex items-center justify-center gap-5">
-                                <div className="w-20 h-10 border border-gray-700 rounded-md flex items-center justify-center gap-1 text-xl gro font-semibold">
-                                    <span onClick={() => handleAddItem(item)} className="w-6 cursor-pointer hover:bg-gray-900 hover:text-white rounded-full text-3xl flex items-center justify-center">-</span>
-                                    <p className="">{item?.numberOfAdd}</p>
-                                    <span onClick={() => handleRemoveItem(item)} className="w-6 cursor-pointer hover:bg-gray-900 hover:text-white rounded-full text-3xl flex items-center justify-center">+</span>
+                            <div className="flex items-start justify-center gap-5 w-full">
+                                <div className="flex items-center gap-5">
+                                    <div className="w-20 h-10 border border-gray-700 rounded-md flex items-center justify-center gap-1 text-xl gro font-semibold">
+                                        <button disabled={item?.numberOfAdd === 1} onClick={() => handleRemoveItem(item)} className="w-6 cursor-pointer hover:bg-gray-900 hover:text-white rounded-full text-3xl flex items-center justify-center">-</button>
+                                        <p className="">{item?.numberOfAdd}</p>
+                                        <button onClick={() => handleAddItem(item)} className="w-6 cursor-pointer hover:bg-gray-900 hover:text-white rounded-full text-3xl flex items-center justify-center">+</button>
+                                    </div>
+                                    <img src={item?.image_url} className="w-[99px] h-[99px] rounded-md" alt="" />
                                 </div>
-                                <img src={item?.image_url} className="w-[99px] h-[99px] rounded-md" alt="" />
+                                <div className="w-full ml-10">
+                                    <p className="bar font-semibold text-xl">{item?.name}</p>
+                                </div>
                             </div>
                             
                             <div className="flex flex-col items-end justify-between h-full gap-10">
-                                <RxCross2 className="text-xl rounded-full hover:bg-gray-600 hover:text-white duration-300 cursor-pointer p-1 w-8 h-8"/>
+                                <RxCross2 onClick={() => handleDeleteItem(item)} className="text-xl rounded-full hover:bg-gray-900 hover:text-white duration-300 cursor-pointer p-1 w-8 h-8"/>
                                 <p className="gro text-xl font-semibold ">€{item?.price}</p>
                             </div>
 

@@ -35,9 +35,32 @@ const ContextProvider = ({children}) => {
         })
     } , [refetch])
 
+    const handleAddToCart = async (item) => {
+        setRefetch(true) ;
+        const {data} = await axios.post(`http://localhost:5555/addToCart` , {numberOfAdd : 1 , email : user?.email ? user?.email : user , ...item}) ;
+        setRefetch(false) ;
+        return data ;
+    }
+
     const handleAdd = async (item) => {
+        setRefetch(true) ;
         const {data} = await axios.patch(`http://localhost:5555/addItem` , {...item}) ;
-        console.log(data) ;
+        setRefetch(false) ;
+        return data ;
+    }
+    
+    const handleRemove = async (item) => {
+        setRefetch(true) ;
+        const {data} = await axios.patch(`http://localhost:5555/removeItem` , {...item}) ;
+        setRefetch(false) ;
+        return data ;
+    }
+
+    const handleDelete = async (item) => {
+        setRefetch(true) ;
+        const {data} = await axios.delete(`http://localhost:5555/deleteItem?id=${item?._id}`) ;
+        setRefetch(false) ;
+        return data ;
     }
 
     const contextValue = {
@@ -48,6 +71,9 @@ const ContextProvider = ({children}) => {
         cartItems ,
         setRefetch ,
         setCartItems ,
+        handleRemove ,
+        handleDelete ,
+        handleAddToCart ,
     }
 
     return (

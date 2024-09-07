@@ -10,15 +10,12 @@ import { toast, ToastContainer } from "react-toastify";
 
 const Products = () => {
     
-    const {products , setRefetch} = useContext(ProductsContext) ;
+    const {products , handleAddToCart} = useContext(ProductsContext) ;
     const {user} = useAuth() ;
 
-    const handleAddToCart = async (item) => {
-        setRefetch(true) ;
-        const {data} = await axios.post(`http://localhost:5555/addToCart` , {numberOfAdd : 1 , email : user?.email ? user?.email : user , ...item}) ;
-        setRefetch(false) ;
+    const handleCartAdd = async (item) => {
         toast.success("Item added Success Fully") ;
-        console.log(data)
+        const data = await handleAddToCart(item) ;
     }
 
     return (

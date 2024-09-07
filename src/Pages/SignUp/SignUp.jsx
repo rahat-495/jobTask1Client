@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const SignUp = () => {
     
@@ -44,6 +45,11 @@ const SignUp = () => {
         googleLogin()
         .then((res) => {
             toast.success('Login Success Fully !') ;
+
+            axios.put('http://localhost:5555/userFromGoogle' , {email : res?.user?.email , name : res?.user?.displayName , islogin : true})
+            .then((res) => {
+                console.log(res.data)
+            })
 
             setTimeout(() => {
                 if(location.state){
@@ -140,6 +146,18 @@ const SignUp = () => {
             <div className="col-span-2 h-screen w-full">
                 <img src={img} className='h-screen w-full' alt="" />
             </div>
+
+            <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+            />
 
         </div>
     );

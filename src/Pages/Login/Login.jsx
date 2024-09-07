@@ -7,7 +7,7 @@ import { IoLogoApple } from "react-icons/io5";
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
-import {toast} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import axios from 'axios';
 
 const Login = () => {
@@ -135,6 +135,18 @@ const Login = () => {
             <div className="col-span-2 h-screen w-full">
                 <img src={img} className='h-screen w-full' alt="" />
             </div>
+
+            <ToastContainer
+            position="top-center"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+            />
 
         </div>
     );
