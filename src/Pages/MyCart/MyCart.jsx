@@ -2,10 +2,19 @@
 import { Button } from "@material-tailwind/react";
 import { useContext } from "react";
 import { ProductsContext } from "../../ProductContext/ProductContext";
+import { RxCross2 } from "react-icons/rx";
 
 const MyCart = () => {
 
-    const {count} = useContext(ProductsContext) ;
+    const {count , cartItems , handleAdd} = useContext(ProductsContext) ;
+
+    const handleAddItem = (item) => {
+        
+    }
+
+    const handleRemoveItem = (item) => {
+
+    }
 
     return (
         <div className="max-w-[1440px] min-h-[70vh] flex items-start justify-between my-12 mx-auto gap-20">
@@ -14,10 +23,27 @@ const MyCart = () => {
 
                 <h1 className="gro text-3xl text-black font-semibold">An overview of your order</h1>
 
-                <div className="bg-[#FAFAFA] min-h-[60vh] rounded-lg w-full border">
+                <div className="bg-[#FAFAFA] min-h-[60vh] rounded-lg w-full border p-6">
 
                     {
-                        
+                        cartItems?.length > 0 && cartItems?.map((item) => (
+                        <div key={item?._id} className="w-full border-b pb-6 mb-6 flex items-start justify-between gap-5">
+                            
+                            <div className="flex items-center justify-center gap-5">
+                                <div className="w-20 h-10 border border-gray-700 rounded-md flex items-center justify-center gap-1 text-xl gro font-semibold">
+                                    <span onClick={() => handleAddItem(item)} className="w-6 cursor-pointer hover:bg-gray-900 hover:text-white rounded-full text-3xl flex items-center justify-center">-</span>
+                                    <p className="">{item?.numberOfAdd}</p>
+                                    <span onClick={() => handleRemoveItem(item)} className="w-6 cursor-pointer hover:bg-gray-900 hover:text-white rounded-full text-3xl flex items-center justify-center">+</span>
+                                </div>
+                                <img src={item?.image_url} className="w-[99px] h-[99px] rounded-md" alt="" />
+                            </div>
+                            
+                            <div className="flex flex-col items-end justify-between h-full gap-10">
+                                <RxCross2 className="text-xl rounded-full hover:bg-gray-600 hover:text-white duration-300 cursor-pointer p-1 w-8 h-8"/>
+                                <p className="gro text-xl font-semibold ">€{item?.price}</p>
+                            </div>
+
+                        </div>))
                     }
 
                 </div>

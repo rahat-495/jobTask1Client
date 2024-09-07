@@ -15,7 +15,7 @@ const Products = () => {
 
     const handleAddToCart = async (item) => {
         setRefetch(true) ;
-        const {data} = await axios.post(`http://localhost:5555/addToCart` , {email : user?.email ? user?.email : user , ...item}) ;
+        const {data} = await axios.post(`http://localhost:5555/addToCart` , {numberOfAdd : 1 , email : user?.email ? user?.email : user , ...item}) ;
         setRefetch(false) ;
         toast.success("Item added Success Fully") ;
         console.log(data)
