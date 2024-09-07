@@ -5,16 +5,25 @@ import {
   Typography,
   Button,
   IconButton,
+  Menu,
+  MenuHandler,
+  Avatar,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import NavLists from "../../Components/NavLists/Navlists";
 import { RiShoppingCart2Line } from "react-icons/ri";
+import logo from '../../assets/userLogo.png'
+import useAuth from "../../Hooks/useAuth";
+import { Link } from "react-router-dom";
+import { ProductsContext } from "../../ProductContext/ProductContext";
 
 const Nav = () => {
 
-  const { pathname } = useLocation();
   const [openNav, setOpenNav] = useState(false);
+  const {logOut , user , logOutDynamic} = useAuth() ;
+  const {count} = useContext(ProductsContext) ;
 
   useEffect(() => {
     window.addEventListener(
@@ -22,6 +31,11 @@ const Nav = () => {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+
+  const handleLogOut = async () => {
+    await logOut() ;
+    logOutDynamic() ;
+  }
 
   return (
     <div className="sticky top-0 z-10 mx-auto max-w-[1440px]">
@@ -41,7 +55,52 @@ const Nav = () => {
 
               <div className="flex items-center justify-end gap-3">
 
-                <RiShoppingCart2Line className="text-xl"/>
+                {
+                  user ? 
+                  <div className="flex items-center gap-3">
+                    <Link to={'/myCart'} className="relative">
+                      <RiShoppingCart2Line className="text-4xl"/>
+                      <p className="text-xs absolute -bottom-1 right-0 bg-black text-white rounded-full w-4 h-4 flex items-center justify-center">{count}</p>
+                    </Link>
+                    <Menu placement="bottom-end" dismiss={{
+                      itemPress: false,
+                    }}>
+
+                      <MenuHandler>
+                        <Avatar
+                          variant="circular"
+                          alt="tania andrew"
+                          className="cursor-pointer"
+                          src={user?.photoURL ? user?.photoURL : logo}
+                          />
+                      </MenuHandler>
+                      <MenuList>
+                        <Button onClick={() => handleLogOut()} className="btn hover:text-black hover:bg-transparent w-full gro capitalize text-base">LogOut</Button>
+                      </MenuList>
+                    </Menu>
+                  </div> :
+                  <div className="flex items-center gap-3">
+                    <Link to={"/login"}>
+                      <Button
+                        variant="text"
+                        size="sm"
+                        className="hidden lg:inline-block border border-[#282828] hover:shadow-none hover:bg-transparent"
+                      >
+                        Login
+                      </Button>
+                    </Link>
+
+                    <Link to={"/signUp"}>
+                      <Button
+                        variant="gradient"
+                        size="sm"
+                        className="hidden lg:inline-block border border-[#282828] hover:shadow-none"
+                      >
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </div>
+                }
                 
               </div>
 

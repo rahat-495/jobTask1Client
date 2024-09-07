@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "name": "Recliner Chair Wood",
+    "price": 299.0,
+    "old_price": 350.0,
+    "discount": "30% OFF",
+    "discount_percentage": 30,
+    "description": "It has a backrest that can be tilted back, and often a footrest extended",
+    "image_url": "https://i.ibb.co.com/0rMbWC4/Image1.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 2,
+    "name": "Timber Ride Padded",
+    "price": 59.0,
+    "old_price": 75.0,
+    "discount": "30% OFF",
+    "discount_percentage": 30,
+    "description": "High Back Rocking Slide Pocket Portable Folding Outdoor Camping Chairs",
+    "image_url": "https://i.ibb.co.com/R4qzK9f/Image2.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 3,
+    "name": "Colored Wooden Chair",
+    "price": 299.0,
+    "old_price": 350.0,
+    "discount": "30% OFF",
+    "discount_percentage": 30,
+    "description": "It has a backrest that can be tilted back, and often a footrest extended",
+    "image_url": "https://i.ibb.co.com/KNKdn89/Image3.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 4,
+    "name": "Elegant Leather Chair",
+    "price": 199.0,
+    "old_price": 250.0,
+    "discount": "20% OFF",
+    "discount_percentage": 20,
+    "description": "High-quality leather chair with excellent comfort and adjustable footrest.",
+    "image_url": "https://i.ibb.co.com/DGRZPqH/Image4.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 5,
+    "name": "Luxury Lounge Chair",
+    "price": 450.0,
+    "old_price": 500.0,
+    "discount": "10% OFF",
+    "discount_percentage": 10,
+    "description": "Luxury lounge chair with comfortable cushioning and premium materials.",
+    "image_url": "https://i.ibb.co.com/qkh1Mr5/Image5.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 6,
+    "name": "Vintage Rocking Chair",
+    "price": 120.0,
+    "old_price": 150.0,
+    "discount": "20% OFF",
+    "discount_percentage": 20,
+    "description": "Vintage wooden rocking chair with a classic design, perfect for relaxation.",
+    "image_url": "https://i.ibb.co.com/9h2Cvv1/Image6.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 7,
+    "name": "Outdoor Folding Chair",
+    "price": 39.0,
+    "old_price": 50.0,
+    "discount": "22% OFF",
+    "discount_percentage": 22,
+    "description": "Lightweight, foldable outdoor chair for camping or beach activities.",
+    "image_url": "https://i.ibb.co.com/0rMbWC4/Image1.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 8,
+    "name": "Modern Office Chair",
+    "price": 150.0,
+    "old_price": 200.0,
+    "discount": "25% OFF",
+    "discount_percentage": 25,
+    "description": "Ergonomic office chair with adjustable height and lumbar support.",
+    "image_url": "https://i.ibb.co.com/R4qzK9f/Image2.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 9,
+    "name": "Swivel Gaming Chair",
+    "price": 300.0,
+    "old_price": 350.0,
+    "discount": "15% OFF",
+    "discount_percentage": 15,
+    "description": "High-back gaming chair with 360-degree swivel and full recline feature.",
+    "image_url": "https://i.ibb.co.com/KNKdn89/Image3.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 10,
+    "name": "Classic Wooden Chair",
+    "price": 80.0,
+    "old_price": 100.0,
+    "discount": "20% OFF",
+    "discount_percentage": 20,
+    "description": "Classic wooden chair with sturdy construction, perfect for dining rooms.",
+    "image_url": "https://i.ibb.co.com/DGRZPqH/Image4.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 11,
+    "name": "Adjustable Bar Stool",
+    "price": 100.0,
+    "old_price": 120.0,
+    "discount": "17% OFF",
+    "discount_percentage": 17,
+    "description": "Adjustable-height bar stool with a swivel seat, great for home bars.",
+    "image_url": "https://i.ibb.co.com/qkh1Mr5/Image5.png",
+    "add_to_cart": "Add to cart"
+  },
+  {
+    "id": 12,
+    "name": "Minimalist Steel Chair",
+    "price": 60.0,
+    "old_price": 75.0,
+    "discount": "20% OFF",
+    "discount_percentage": 20,
+    "description": "Minimalist chair made from lightweight steel, perfect for modern homes.",
+    "image_url": "https://i.ibb.co.com/9h2Cvv1/Image6.png",
+    "add_to_cart": "Add to cart"
+  }
+]

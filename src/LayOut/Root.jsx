@@ -6,13 +6,13 @@ import Footer from '../Shared/Footer/Footer';
 const Root = () => {
     
     const {pathname} = useLocation() ;
-console.log(pathname !== '/login' || pathname !== '/signUp' && "asfsd")
+    
     return (
         <div>
 
-            <div className="">
+            <div className="sticky top-0 z-10">
                 {
-                    pathname !== '/login' || pathname !== '/signUp' || <Nav/>  
+                    pathname === '/' || pathname === '/products' || pathname === '/myCart' ? <Nav/> : ''
                 }
             </div>
 
@@ -22,7 +22,7 @@ console.log(pathname !== '/login' || pathname !== '/signUp' && "asfsd")
 
             <div className="">
                 {
-                    pathname !== '/login' || pathname !== '/signUp' || <Footer/>  
+                    pathname === '/' || pathname === '/products' || pathname === '/myCart' ? <Footer/> : ''
                 }
             </div>
 

@@ -5,11 +5,56 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoApple } from "react-icons/io5";
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
     
+    const {user , googleLogin} = useAuth() ;
+    const navigate = useNavigate() ;
     const [eye , setEye] = useState(false) ;
+    const [rememver , setRememver] = useState(false) ;
+    const [errorText , setErrorText] = useState('') ;
+    const {signUp} = useAuth() ;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault() ;
+
+        const form = e.target ;
+        const firstName = form.firstName.value ;
+        const lastName = form.lastName.value ;
+        const email = form.email.value ;
+        const pass = form.password.value ;
+        
+        if(rememver){
+            const data = await signUp(firstName , lastName , email , pass) ;
+            console.log(data)
+        }
+        else{
+            setErrorText("Please Accept Our Terms & Conditions")
+        }
+    }
+
+    if(user){
+        navigate('/')
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+        .then((res) => {
+            toast.success('Login Success Fully !') ;
+
+            setTimeout(() => {
+                if(location.state){
+                  navigate(location.state) ;
+                }
+                else{
+                  navigate('/') ;
+                }
+            }, 1000);
+        })
+    }
 
     return (
         <div className="min-h-[70vh] grid grid-cols-5 w-full">
@@ -26,14 +71,14 @@ const SignUp = () => {
                         <p className="font-medium text-lg">Signup for purchase your desire products</p>
                     </div>
 
-                    <form className='flex flex-col items-start gap-4 w-full'>
+                    <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col items-start gap-4 w-full'>
 
                         <div className="w-full grid grid-cols-2 gap-3">
                             <Input type='text' name='firstName' label='First name (optional)'/>
                             <Input type='text' name='lastName' label='Last name (optional)'/>
                         </div>
 
-                        <Input name='email' label='Email Address'/>
+                        <Input name='email' label='Email Address' required/>
                         <div className="relative w-full">
                             {eye ? (
                             <IoMdEyeOff
@@ -56,12 +101,11 @@ const SignUp = () => {
                             />
                         </div>
                         <Checkbox
+                            onClick={() => setRememver(!rememver)}
                             label={
                                 <Typography className="flex font-medium">
                                 I agree with the&nbsp;
                                 <Typography
-                                    as="a"
-                                    href="#"
                                     className="underline"
                                 >
                                     terms and conditions
@@ -70,6 +114,13 @@ const SignUp = () => {
                                 </Typography>
                             }
                         />
+                        <div>
+                            {rememver ? (
+                                <p></p>
+                            ) : (
+                                <p className="text-red-800 font-semibold">{errorText}</p>
+                            )}
+                        </div>
 
                         <input type="submit" value={"SignUp"} className='btn bg-black text-white gro hover:text-black hover:bg-transparent w-full'/>
                             
@@ -78,7 +129,7 @@ const SignUp = () => {
                     <div className="divider border-black">Or</div>
 
                     <div className="grid grid-cols-2 w-full gap-3">
-                        <Button className='w-full flex items-center justify-center gap-3 capitalize gro text-base btn bg-transparent text-black hover:bg-black hover:text-white'><FcGoogle className='text-xl' /> Google</Button>
+                        <Button onClick={handleGoogleLogin} className='w-full flex items-center justify-center gap-3 capitalize gro text-base btn bg-transparent text-black hover:bg-black hover:text-white'><FcGoogle className='text-xl' /> Google</Button>
                         <Button className='w-full flex items-center justify-center gap-3 capitalize gro text-base btn bg-transparent text-black hover:bg-black hover:text-white'><IoLogoApple className='text-xl' />Apple</Button>
                     </div>
                     <p className="gro font-semibold text-lg">Have an account ? <Link to={'/login'} className='text-[#0F3DDE]'>Login</Link></p>

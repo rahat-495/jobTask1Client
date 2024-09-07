@@ -5,11 +5,59 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoApple } from "react-icons/io5";
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
+import {toast} from 'react-toastify';
+import axios from 'axios';
 
 const Login = () => {
     
+    const {googleLogin , user} = useAuth() ;
+    const navigate = useNavigate() ;
     const [eye , setEye] = useState(false) ;
+    const [rememver , setRememver] = useState(false) ;
+    const [errorText , setErrorText] = useState('') ;
+    const {login} = useAuth() ;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault() ;
+
+        const form = e.target ;
+        const email = form.email.value ;
+        const pass = form.password.value ;
+        if(rememver){
+            const data = await login(email , pass) ;
+            console.log(data)
+        }
+        else{
+            setErrorText("Please Accept Our Terms & Conditions")
+        }
+    }
+
+    if(user){
+        navigate('/')
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+        .then((res) => {
+            toast.success('Login Success Fully !') ;
+
+            axios.put('http://localhost:5555/userFromGoogle' , {email : res?.user?.email , name : res?.user?.displayName , islogin : true})
+            .then((res) => {
+                console.log(res.data)
+            })
+
+            setTimeout(() => {
+                if(location.state){
+                  navigate(location.state) ;
+                }
+                else{
+                  navigate('/') ;
+                }
+            }, 1000);
+        })
+    }
 
     return (
         <div className="min-h-[70vh] grid grid-cols-5 w-full">
@@ -22,9 +70,9 @@ const Login = () => {
                         <p className="font-medium text-lg">Enter your Credentials to access your account</p>
                     </div>
 
-                    <form className='flex flex-col items-start gap-4 w-full'>
+                    <form onSubmit={handleSubmit} className='flex flex-col items-start gap-4 w-full'>
 
-                        <Input name='email' label='Email Address'/>
+                        <Input name='email' label='Email Address' required/>
                         <div className="relative w-full">
                             {eye ? (
                             <IoMdEyeOff
@@ -47,12 +95,11 @@ const Login = () => {
                             />
                         </div>
                         <Checkbox
+                            onClick={() => setRememver(!rememver)}
                             label={
                                 <Typography className="flex font-medium">
                                 I agree with the&nbsp;
                                 <Typography
-                                    as="a"
-                                    href="#"
                                     className="underline"
                                 >
                                     terms and conditions
@@ -62,6 +109,14 @@ const Login = () => {
                             }
                         />
 
+                        <div>
+                            {rememver ? (
+                                <p></p>
+                            ) : (
+                                <p className="text-red-800 font-semibold">{errorText}</p>
+                            )}
+                        </div>
+
                         <input type="submit" value={"SignUp"} className='btn bg-black text-white gro hover:text-black hover:bg-transparent w-full'/>
                             
                     </form>
@@ -69,7 +124,7 @@ const Login = () => {
                     <div className="divider border-black">Or</div>
 
                     <div className="grid grid-cols-2 w-full gap-3">
-                        <Button className='w-full flex items-center justify-center gap-3 capitalize gro text-base btn bg-transparent text-black hover:bg-black hover:text-white'><FcGoogle className='text-xl' /> Google</Button>
+                        <Button onClick={handleGoogleLogin} className='w-full flex items-center justify-center gap-3 capitalize gro text-base btn bg-transparent text-black hover:bg-black hover:text-white'><FcGoogle className='text-xl' /> Google</Button>
                         <Button className='w-full flex items-center justify-center gap-3 capitalize gro text-base btn bg-transparent text-black hover:bg-black hover:text-white'><IoLogoApple className='text-xl' />Apple</Button>
                     </div>
                     <p className="gro font-semibold text-lg">Dont have an account ? <Link to={'/signUp'} className='text-[#0F3DDE]'>SignUp</Link></p>
